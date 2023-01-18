@@ -1,0 +1,403 @@
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+:root {
+	font-size: 16px;
+	--color-text: #fff;
+	--color-bg: rgb(71,50,171);
+	--color-link: #fff;
+	--color-link-hover: #fff;
+	--page-padding: 1.5rem 2rem;
+}
+
+body {
+	margin: 0;
+	color: var(--color-text);
+	background-color: var(--color-bg);
+	font-family: area-normal,-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-image: linear-gradient(
+	  180deg,
+	  hsl(240deg 91% 49%) 0%,
+	  hsl(252deg 93% 47%) 10%,
+	  hsl(258deg 93% 46%) 20%,
+	  hsl(263deg 93% 46%) 30%,
+	  hsl(266deg 91% 45%) 40%,
+	  hsl(269deg 88% 45%) 50%,
+	  hsl(272deg 78% 43%) 60%,
+	  hsl(275deg 69% 40%) 70%,
+	  hsl(277deg 60% 37%) 80%,
+	  hsl(294deg 74% 43%) 90%, 
+	  hsl(258deg 76% 45%) 100%
+	);
+	overflow-x: hidden;
+}
+
+/* Page Loader */
+.js .loading::before,
+.js .loading::after {
+	content: '';
+	position: fixed;
+	z-index: 1000;
+}
+
+.js .loading::before {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--color-bg);
+}
+
+.js .loading::after {
+	top: 50%;
+	left: 50%;
+	width: 60px;
+	height: 60px;
+	margin: -30px 0 0 -30px;
+	border-radius: 50%;
+	opacity: 0.4;
+	background: var(--color-link);
+	animation: loaderAnim 0.7s linear infinite alternate forwards;
+
+}
+
+@keyframes loaderAnim {
+	to {
+		opacity: 1;
+		transform: scale3d(0.5,0.5,1);
+	}
+}
+
+a {
+	text-decoration: none;
+	color: var(--color-link);
+	outline: none;
+	cursor: pointer;
+}
+
+a:hover {
+	color: var(--color-link-hover);
+	outline: none;
+}
+
+/* Better focus styles from https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible */
+a:focus {
+	/* Provide a fallback style for browsers
+	 that don't support :focus-visible */
+	outline: none;
+	background: lightgrey;
+}
+
+a:focus:not(:focus-visible) {
+	/* Remove the focus indicator on mouse-focus for browsers
+	 that do support :focus-visible */
+	background: transparent;
+}
+
+a:focus-visible {
+	/* Draw a very noticeable focus style for
+	 keyboard-focus on browsers that do support
+	 :focus-visible */
+	outline: 2px solid red;
+	background: transparent;
+}
+
+.unbutton {
+	background: none;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	font: inherit;
+	cursor: pointer;
+}
+
+.unbutton:focus {
+	outline: none;
+}
+
+main {
+	counter-reset: section;
+}
+
+.splitting .word {
+	white-space: nowrap;
+}
+
+.frame {
+	color: var(--color-title);
+	padding: var(--page-padding);
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto auto auto;
+	grid-template-areas: 'title' 'prev' 'sponsor';
+	justify-content: start;
+	justify-items: end;
+	margin-bottom: 3rem;
+	grid-gap: 0.5rem;
+	align-items: start;
+	font-weight: 600;
+	font-size: 14px;
+}
+
+.frame a:not(.frame__title-back) {
+	white-space: nowrap;
+	overflow: hidden;
+	position: relative;
+}
+
+.frame a:not(.frame__title-back)::before {
+	content: '';
+	height: 1px;
+	width: 100%;
+	background: currentColor;
+	position: absolute;
+	top: 90%;
+	transition: transform 0.3s;
+	transform-origin: 0% 50%;
+}
+
+.frame a:not(.frame__title-back):hover::before {
+	transform: scaleX(0);
+	transform-origin: 100% 50%;
+}
+
+.frame__title {
+	grid-area: title;
+	display: flex;
+	align-items: center;
+}
+
+.frame__title-main {
+	font-size: 1rem;
+	margin: 0;
+	font-weight: normal;
+}
+
+.frame__title-back {
+	position: relative;
+	display: flex;
+	align-items: flex-end;
+}
+
+.frame__title-back svg {
+	fill: currentColor;
+}
+
+.frame__prev {
+	grid-area: prev;
+	align-self: start;
+}
+
+.intro {
+	height: 100vh;
+	display: grid;
+	place-items: center;
+	text-align: center;
+}
+
+.intro__title {
+	display: grid;
+	place-items: center;
+	margin: 0;
+	line-height: 0.9;
+	font-weight: 300;
+}
+
+.intro__title-pre {
+	font-family: norman-stencil, sans-serif;
+	font-weight: 800;
+	text-transform: uppercase;
+	font-size: clamp(2rem,10vw,9rem);
+}
+
+.intro__title-sub {
+	font-size: clamp(1rem,6vw,2.75rem);
+}
+
+.intro__info {
+	position: relative;
+	max-width: 230px;
+	opacity: 0.6;
+	line-height: 1.2;
+	margin-bottom: 4rem;
+	padding-bottom: 1rem;
+}
+
+.intro__info::after {
+	content: '';
+	position: absolute;
+	left: 50%;
+	width: 1px;
+	height: 2rem;
+	background: #fff;
+	top: 100%;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	position: relative;
+	padding: var(--page-padding);
+}
+
+.content:last-child {
+	padding-bottom: 40vh;
+}
+
+.content--full {
+	padding: 0;
+}
+
+.content p {
+	max-width: 660px;
+	margin: 1.5rem auto;
+	font-size: 1.25rem;
+}
+
+.content--highlight p {
+	font-size: clamp(1rem,3vw,2rem);
+}
+
+.content__title {
+	font-size: 12vw;
+	line-height: 0.8;
+	counter-increment: section;
+	text-align: center;
+	display: grid;
+	gap: 2rem;
+}
+
+.content__title::before {
+	content: '.'counter(section);
+	font-weight: 400;
+	font-family: area-normal, sans-serif;
+	display: block;
+	font-size: 1rem;
+	margin-bottom: 10vh;
+	text-align: center;
+}
+
+.content__title--sides {
+	display: grid;
+	grid-template-rows: auto auto;
+	grid-template-columns: 100%;
+	text-align: left;
+	gap: 2rem;
+}
+
+.content__title--sides span:last-child {
+	justify-self: end;
+}
+
+.font-1 {
+	font-family: wayfinder-cf, serif;
+	font-weight: 100;
+}
+
+.font-2 {
+	font-family: campaign-serif, sans-serif;
+	font-weight: 400;
+}
+
+.font-3 {
+	font-family: area-normal, sans-serif;
+	font-weight: 600;
+}
+
+.font-4 {
+	font-family: campaign-serif, sans-serif;
+	font-weight: 400;
+	font-style: italic;
+}
+
+.font-5 {
+	font-family: zedou, sans-serif;
+	font-weight: 300;
+	text-transform: uppercase;
+}
+
+.font-6 {
+	font-family: afronaut, sans-serif;
+	font-weight: 400;
+}
+
+.font-7 {
+	font-family: hoss-round-wide, sans-serif;
+	font-weight: 400;
+}
+
+.font-8 {
+	font-family: monotalic, sans-serif;
+	font-weight: 400;
+	text-transform: lowercase;
+}
+
+.font-9 {
+	font-family: aziga, sans-serif;
+	font-weight: 400;
+}
+
+.font-10 {
+	font-family: norman-stencil, sans-serif;
+	font-weight: 800;
+}
+
+.font-11 {
+	font-family: neighbor, sans-serif;
+	font-weight: 400;
+}
+
+.font-12 {
+	font-family: halogen, sans-serif;
+	font-weight: 700;
+}
+
+.font-height {
+	line-height: 1.4;
+}
+
+.font-larger {
+	font-size: 27vw;
+}
+
+.font-upper {
+	text-transform: uppercase;
+}
+
+.font-sub {
+	font-size: 5vw;
+	margin-top: 2rem;
+    display: block;
+}
+
+.splitting .font-sub .word {
+	display: grid;
+	grid-auto-flow: column;
+}
+
+.font-medium {
+	font-size: 6vw;
+	margin-top: 3rem;
+}
+
+.char-wrap {
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+}
+
+@media screen and (min-width: 53em) {
+	.frame {
+		justify-items: start;
+		grid-gap: 2rem;
+		grid-template-columns: auto auto 1fr;
+		grid-template-rows: auto;
+		grid-template-areas: 'title prev sponsor';
+	}
+}

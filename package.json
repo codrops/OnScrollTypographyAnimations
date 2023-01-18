@@ -1,0 +1,31 @@
+{
+  "name": "onscrolltypographyanimations",
+  "version": "1.0.0",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "description": "",
+  "scripts": {
+    "start": "parcel src/index.html --open",
+    "clean": "rm -rf dist/*",
+    "build:parcel": "parcel build src/index.html --no-content-hash --no-source-maps --public-url ./",
+    "build": "npm run clean && npm run build:parcel"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/codrops/[NAME].git"
+  },
+  "keywords": [],
+  "author": "Codrops",
+  "license": "MIT",
+  "homepage": "https://tympanus.net/codrops",
+  "bugs": {
+    "url": "https://github.com/codrops/[NAME]/issues"
+  },
+  "devDependencies": {
+    "parcel": "^2.8.2"
+  },
+  "dependencies": {
+    "@studio-freight/lenis": "^0.2.28",
+    "gsap": "^3.11.4",
+    "splitting": "^1.0.6"
+  }
+}
