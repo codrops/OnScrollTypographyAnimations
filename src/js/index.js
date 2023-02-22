@@ -63,13 +63,13 @@ const scroll = () => {
         
         const chars = title.querySelectorAll('.char');
 
-        gsap.set(chars, { 
+        gsap.fromTo(chars, { 
             'will-change': 'opacity, transform', 
             opacity: 0, 
             scale: 0.6,
             rotationZ: () => gsap.utils.random(-20,20)
-        });
-        gsap.to(chars, {
+        },
+        {
             ease: 'power4',
             opacity: 1,
             scale: 1,
@@ -89,11 +89,17 @@ const scroll = () => {
         
         const chars = title.querySelectorAll('.char');
 
-        gsap.set(chars, { 'will-change': 'opacity, transform', opacity: 0, yPercent: 120, scaleY: 2.3, scaleX: 0.7, transformOrigin: '50% 0%' });
-        gsap.to(chars, {
+        gsap.fromTo(chars, { 
+            'will-change': 'opacity, transform', 
+            opacity: 0, 
+            yPercent: 120, 
+            scaleY: 2.3, 
+            scaleX: 0.7, 
+            transformOrigin: '50% 0%' 
+        }, 
+        {
             duration: 1,
             ease: 'back.inOut(2)',
-            
             opacity: 1,
             yPercent: 0,
             scaleY: 1,
@@ -103,10 +109,7 @@ const scroll = () => {
                 trigger: title,
                 start: 'center bottom+=50%',
                 end: 'bottom top+=40%',
-                scrub: true,
-                //start: 'center center',
-                //end: '+=100%',
-                //pin: title.parentNode,
+                scrub: true
             }
         });
 
@@ -116,12 +119,12 @@ const scroll = () => {
         
         const chars = title.querySelectorAll('.char');
 
-        gsap.set(chars, { 
+        gsap.fromTo(chars,  { 
             'will-change': 'transform', 
             transformOrigin: '50% 0%', 
             scaleY: 0
-        });
-        gsap.to(chars, {
+        },
+        {
             ease: 'back',
             opacity: 1,
             scaleY: 1,
@@ -140,14 +143,16 @@ const scroll = () => {
     fx4Titles.forEach(title => {
         
         const words = title.querySelectorAll('.word');
-        words.forEach(word => {
+        
+        for (const word of words) {
+            
             const chars = word.querySelectorAll('.char');
 
-            gsap.set(chars, { 
+            gsap.fromTo(chars,  { 
                 'will-change': 'opacity, transform', 
                 x: (position,_,arr) => 150*(position-arr.length/2) 
-            });
-            gsap.to(chars, {
+            },
+            {
                 ease: 'power1.inOut',
                 x: 0,
                 stagger: {
@@ -161,7 +166,8 @@ const scroll = () => {
                     scrub: true,
                 }
             });
-        });
+
+        };
 
     });
 
@@ -169,13 +175,13 @@ const scroll = () => {
         
         const chars = title.querySelectorAll('.char');
 
-        gsap.set(chars, { 
+        gsap.fromTo(chars, { 
             'will-change': 'opacity, transform', 
             opacity: 0, 
             xPercent: () => gsap.utils.random(-200,200), 
             yPercent: () => gsap.utils.random(-150,150) 
-        });
-        gsap.to(chars, {
+        },
+        {
             ease: 'power1.inOut',
             opacity: 1,
             xPercent: 0,
@@ -194,17 +200,20 @@ const scroll = () => {
     fx6Titles.forEach(title => {
         
         const words = title.querySelectorAll('.word');
-        words.forEach(word => {
+        
+        for (const word of words) {
+
             const chars = word.querySelectorAll('.char');
 
-            gsap.set(chars[0].parentNode, { perspective: 1000 });
-            gsap.set(chars, { 
+            chars.forEach(char => gsap.set(char.parentNode, { perspective: 2000 })); 
+
+            gsap.fromTo(chars, { 
                 'will-change': 'opacity, transform', 
                 opacity: 0, 
                 rotationX: -90,
                 yPercent: 50
-            });
-            gsap.to(chars, {
+            },
+            {
                 ease: 'power1.inOut',
                 opacity: 1,
                 rotationX: 0,
@@ -220,25 +229,29 @@ const scroll = () => {
                     scrub: 0.9
                 }
             });
-        });
+
+        }
 
     });
 
     fx7Titles.forEach(title => {
         
         const words = title.querySelectorAll('.word');
-        words.forEach(word => {
+
+        for (const word of words) {
+
             const chars = word.querySelectorAll('.char');
 
-            gsap.set(chars[0].parentNode, { perspective: 1000 });
-            gsap.set(chars, { 
+            chars.forEach(char => gsap.set(char.parentNode, { perspective: 2000 })); 
+
+            gsap.fromTo(chars, { 
                 'will-change': 'opacity, transform', 
                 transformOrigin: '100% 50%',
                 opacity: 0, 
                 rotationY: -90,
                 z: -300
-            });
-            gsap.to(chars, {
+            },
+            {
                 ease: 'expo',
                 opacity: 1,
                 rotationY: 0,
@@ -251,22 +264,23 @@ const scroll = () => {
                     scrub: 1
                 }
             });
-        });
+
+        }
 
     });
 
-    const lettersAndSymbols = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '/', '\\', '|', '[', ']', '{', '}', ';', ':', '\'', '\"', '<', '>', ','];
+    const lettersAndSymbols = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '!', '@', '#', '$', '%', '^', '&', '*', '-', '_', '+', '=', ';', ':', '<', '>', ','];
     fx8Titles.forEach(title => {
         
         const chars = title.querySelectorAll('.char');
 
-        gsap.set(chars, { 
-            opacity: 0
-        });
         chars.forEach((char, position) => {
             let initialHTML = char.innerHTML;
             
-            gsap.to(char, {
+            gsap.fromTo(char, {
+                opacity: 0
+            },
+            {
                 duration: 0.03,
                 innerHTML: () => lettersAndSymbols[Math.floor(Math.random() * lettersAndSymbols.length)],
                 repeat: 1,
@@ -291,16 +305,17 @@ const scroll = () => {
     fx9Titles.forEach(title => {
 
         const words = title.querySelectorAll('.word');
-        words.forEach(word => {
-            
+
+        for (const word of words) {
+
             const chars = word.querySelectorAll('.char');
 
-            gsap.set(chars, { 
+            gsap.fromTo(chars,  { 
                 'will-change': 'transform', 
                 scaleX: 0,
                 x: (_, target) => window.innerWidth/2 - target.offsetLeft - target.offsetWidth/2
-            });
-            gsap.to(chars, {
+            },
+            {
                 ease: 'power1.inOut',
                 scaleX: 1,
                 x: 0,
@@ -312,7 +327,7 @@ const scroll = () => {
                 }
             });
 
-        });
+        }
 
     });
 
@@ -320,12 +335,12 @@ const scroll = () => {
         
         const chars = title.querySelectorAll('.char');
 
-        gsap.set(chars, { 
+        gsap.fromTo(chars, { 
             'will-change': 'opacity', 
             opacity: 0,
             filter: 'blur(20px)'
-        });
-        gsap.to(chars, {
+        },
+        {
             duration: 0.25,
             ease: 'power1.inOut',
             opacity: 1,
@@ -346,12 +361,12 @@ const scroll = () => {
         const chars = title.querySelectorAll('.char');
         wrapElements(chars, 'span', 'char-wrap');
 
-        gsap.set(chars, { 
+        gsap.fromTo(chars, { 
             'will-change': 'transform', 
             transformOrigin: '0% 50%',
             xPercent: 105,
-        });
-        gsap.to(chars, {
+        }, 
+        {
             duration: 1,
             ease: 'expo',
             xPercent: 0,
@@ -371,14 +386,14 @@ const scroll = () => {
         const chars = title.querySelectorAll('.char');
         wrapElements(chars, 'span', 'char-wrap');
     
-        gsap.set(chars, { 
+        gsap.fromTo(chars, { 
             'will-change': 'transform', 
             xPercent: -250,
             rotationZ: 45,
             scaleX: 6,
             transformOrigin: '100% 50%'
-        });
-        gsap.to(chars, {
+        },
+        {
             duration: 1,
             ease: 'power2',
             xPercent: 0,
@@ -398,15 +413,17 @@ const scroll = () => {
     fx13Titles.forEach(title => {
         
         const chars = title.querySelectorAll('.char');
-        gsap.set(chars[0].parentNode, { perspective: 1000 });
-        gsap.set(chars, { 
+        
+        chars.forEach(char => gsap.set(char.parentNode, { perspective: 2000 })); 
+
+        gsap.fromTo(chars, { 
             'will-change': 'opacity, transform', 
             opacity: 0, 
             rotationY: 180,
             xPercent: -40,
             yPercent: 100
-        });
-        gsap.to(chars, {
+        },
+        {
             ease: 'power4.inOut()',
             opacity: 1,
             rotationY: 0,
@@ -429,16 +446,28 @@ const scroll = () => {
     fx14Titles.forEach(title => {
         
         const chars = title.querySelectorAll('.char');
-        gsap.set(title, { 
+        
+        gsap.timeline()
+        .fromTo(title, {
             'will-change': 'transform', 
             xPercent: 100
-        });
-        gsap.set(chars, { 
+        }, {
+            ease: 'none',
+            xPercent: 0,
+            scrollTrigger: {
+                trigger: title,
+                scrub: true,
+                start: 'center center',
+                end: '+=100%',
+                pin: title.parentNode,
+            }
+        })
+        .fromTo(chars, { 
             'will-change': 'transform', 
             scale: 3,
             yPercent: -900
-        });
-        gsap.to(chars, {
+        },
+        {
             ease: 'back(2)',
             scale: 1,
             yPercent: 0,
@@ -449,8 +478,21 @@ const scroll = () => {
                 end: '+=100%',
                 scrub: 1.9,
             }
-        });
-        gsap.to(title, {
+        }, 0);
+        
+    });
+
+    fx15Titles.forEach(title => {
+        
+        const chars = title.querySelectorAll('.char');
+        
+        chars.forEach(char => gsap.set(char.parentNode, { perspective: 2000 })); 
+        
+        gsap.timeline()
+        .fromTo(title, {
+            'will-change': 'transform', 
+            xPercent: -80
+        }, {
             ease: 'none',
             xPercent: 0,
             scrollTrigger: {
@@ -460,25 +502,14 @@ const scroll = () => {
                 end: '+=100%',
                 pin: title.parentNode,
             }
-        });
-        
-    });
-
-    fx15Titles.forEach(title => {
-        
-        const chars = title.querySelectorAll('.char');
-        gsap.set(chars[0].parentNode, { perspective: 1000 });
-        gsap.set(title, { 
-            'will-change': 'transform', 
-            xPercent: -80
-        });
-        gsap.set(chars, { 
+        })
+        .fromTo(chars, { 
             'will-change': 'opacity, transform', 
             transformOrigin: '50% 50% -200px',
             rotationX: 380,
             opacity: 0,
-        });
-        gsap.to(chars, {
+        },
+        {
             ease: 'expo.inOut',
             rotationX: 0,
             z: 0,
@@ -490,18 +521,7 @@ const scroll = () => {
                 end: '+=140%',
                 scrub: 1.2,
             }
-        });
-        gsap.to(title, {
-            ease: 'none',
-            xPercent: 0,
-            scrollTrigger: {
-                trigger: title,
-                scrub: true,
-                start: 'center center',
-                end: '+=100%',
-                pin: title.parentNode,
-            }
-        });
+        }, 0);
 
     });
 

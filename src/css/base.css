@@ -20,6 +20,10 @@ body {
 	font-family: area-normal,-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	overflow-x: hidden;
+}
+
+.demo-1 {
 	background-image: linear-gradient(
 	  180deg,
 	  hsl(240deg 91% 49%) 0%,
@@ -34,7 +38,13 @@ body {
 	  hsl(294deg 74% 43%) 90%, 
 	  hsl(258deg 76% 45%) 100%
 	);
-	overflow-x: hidden;
+}
+
+.demo-2 {
+	--color-text: #ddc4a4;
+    --color-bg: #0e0e0e;
+    --color-link: #ede3e3;
+    --color-link-hover: #d68521;
 }
 
 /* Page Loader */
@@ -133,8 +143,8 @@ main {
 	padding: var(--page-padding);
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: auto auto auto;
-	grid-template-areas: 'title' 'prev' 'sponsor';
+	grid-template-rows: auto auto auto auto;
+	grid-template-areas: 'title' 'prev' 'demos' 'sponsor';
 	justify-content: start;
 	justify-items: end;
 	margin-bottom: 3rem;
@@ -144,13 +154,15 @@ main {
 	font-size: 14px;
 }
 
-.frame a:not(.frame__title-back) {
+.frame a:not(.frame__title-back),
+.line {
 	white-space: nowrap;
 	overflow: hidden;
 	position: relative;
 }
 
-.frame a:not(.frame__title-back)::before {
+.frame a:not(.frame__title-back)::before,
+.line::before {
 	content: '';
 	height: 1px;
 	width: 100%;
@@ -161,7 +173,8 @@ main {
 	transform-origin: 0% 50%;
 }
 
-.frame a:not(.frame__title-back):hover::before {
+.frame a:not(.frame__title-back):hover::before,
+.line:hover::before {
 	transform: scaleX(0);
 	transform-origin: 100% 50%;
 }
@@ -193,6 +206,15 @@ main {
 	align-self: start;
 }
 
+.frame__demos {
+	display: flex;
+	gap: 1rem;
+}
+
+.frame__demos span {
+	opacity: 0.7;
+}
+
 .intro {
 	height: 100vh;
 	display: grid;
@@ -221,11 +243,13 @@ main {
 
 .intro__info {
 	position: relative;
-	max-width: 230px;
+	max-width: 20ch;
 	opacity: 0.6;
 	line-height: 1.2;
 	margin-bottom: 4rem;
 	padding-bottom: 1rem;
+	font-weight: 600;
+	font-size: 14px;
 }
 
 .intro__info::after {
@@ -258,6 +282,8 @@ main {
 	max-width: 660px;
 	margin: 1.5rem auto;
 	font-size: 1.25rem;
+	line-height: 1.5;
+	font-weight: 600;
 }
 
 .content--highlight p {
@@ -271,6 +297,14 @@ main {
 	text-align: center;
 	display: grid;
 	gap: 2rem;
+}
+
+.content__title--left {
+	text-align: left;
+}
+
+.content__title--right {
+	text-align: right;
 }
 
 .content__title::before {
@@ -358,8 +392,82 @@ main {
 	font-weight: 700;
 }
 
+.font-13 {
+	font-weight: initial;
+	font-family: "marlide-display-variable", sans-serif;
+	font-variation-settings: "wght" 400;
+}
+
+.font-14 {
+	font-weight: initial;
+	font-family: "june-expt-variable", sans-serif;
+	font-variation-settings: "STYL" 0;
+}
+
+.font-15 {
+	font-weight: initial;
+	font-family: "june-expt-variable",sans-serif;
+	font-variation-settings: 'STYL' 100;
+}
+
+.font-16 {
+	font-weight: initial;
+	font-family: "inge-variable", sans-serif;
+	font-variation-settings: "slnt" 0;
+}
+
+.font-17 {
+	font-weight: initial;
+	font-family: "antipoda-variable", sans-serif;
+	font-variation-settings: "wght" 450, "wdth" 80;
+}
+
+.font-18 {
+	font-weight: initial;
+	font-family: "vinila-variable", sans-serif;
+	font-variation-settings: "slnt" 0, "wght" 100, "wdth" 100;
+}
+
+.font-19 {
+	font-weight: initial;
+	font-family: "nagel-variable", sans-serif;
+	font-variation-settings: "slnt" 0, "wght" 610;
+}
+
+.font-20 {
+	font-weight: initial;
+	font-family: "borax-variable", sans-serif;
+	font-variation-settings: "wght" 400;
+}
+
+.font-21 {
+	font-family: "gigantic", sans-serif;
+	font-weight: 900;
+	font-style: normal;
+}
+
+.font-22 {
+	font-family: "capsule", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.font-23 {
+	font-family: "arsenica-variable", sans-serif;
+	font-variation-settings: "opsz" 1000, "wght" 300;
+}
+
 .font-height {
 	line-height: 1.4;
+}
+
+.font-height-medium {
+	line-height: 0.9;
+}
+
+.font-medium {
+	font-size: 6vw;
+	margin-top: 3rem;
 }
 
 .font-larger {
@@ -381,11 +489,6 @@ main {
 	grid-auto-flow: column;
 }
 
-.font-medium {
-	font-size: 6vw;
-	margin-top: 3rem;
-}
-
 .char-wrap {
 	display: inline-block;
 	position: relative;
@@ -396,8 +499,11 @@ main {
 	.frame {
 		justify-items: start;
 		grid-gap: 2rem;
-		grid-template-columns: auto auto 1fr;
+		grid-template-columns: auto auto 1fr auto;
 		grid-template-rows: auto;
-		grid-template-areas: 'title prev sponsor';
+		grid-template-areas: 'title prev demos sponsor';
+	}
+	.frame__demos {
+		justify-self: end;
 	}
 }
