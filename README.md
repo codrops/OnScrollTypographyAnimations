@@ -1,4 +1,4 @@
-# On-Scroll Typygorahy Animations
+# On-Scroll Typography Animations
 
 Inspiration and ideas for on-scroll typography animations that add an extra layer of creativity to a website design.
 
